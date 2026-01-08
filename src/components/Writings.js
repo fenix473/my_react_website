@@ -1,27 +1,43 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {Document, Page, pdfjs} from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
-import orangeManPdf from "../assets/writings/Orange Man.pdf";
-import SubjugationPdf from "../assets/writings/Subjugation of Nature.pdf";
-import ProfessionPdf from "../assets/writings/Editable ENG II_ Initial.pdf";
-import Mores from "../assets/writings/Copy of Research Essay.pdf";
+import "../css/Writings.css";
 
 // Configure PDF.js worker
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+pdfjs.GlobalWorkerOptions.workerSrc = `https://unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+
+// PDFs served from public folder
+const baseUrl = process.env.PUBLIC_URL + "/writings/";
 
 // Essay collection with titles and files
 const essays = [
-    { title: "Orange Man", file: orangeManPdf },
-    { title: "Subjugation of Nature", file: SubjugationPdf },
-    { title: "Professional Writing", file: ProfessionPdf },
-    { title: "Research Essay", file: Mores }
+    { title: "Orange Man", file: baseUrl + "Orange Man.pdf", description: "Reflection on the Charge of the Light Brigade by Tennyson. Exploring the topics of discipline, loyalty and officer responsibility." },
+    { title: "Subjugation of Nature", file: baseUrl + "Subjugation of Nature.pdf", description: "Explration of the conflict between human and nature in the context of the Enlightenment and Romanticism." },
+    { title: "Professional Writing", file: baseUrl + "Editable ENG II_ Initial.pdf", description: "A reflection on what it means to be a professional." },
+    { title: "Research Essay", file: baseUrl + "Copy of Research Essay.pdf", description: "A research essay on work ethics." }
 ];
+
+// Hook to get responsive PDF width
+function usePdfWidth() {
+    const [width, setWidth] = useState(Math.min(600, window.innerWidth - 40));
+    
+    useEffect(() => {
+        function handleResize() {
+            setWidth(Math.min(600, window.innerWidth - 40));
+        }
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+    
+    return width;
+}
 
 function Writings() {
 
     const [numPages, setNumPages] = useState(null);
     const [selectedEssay, setSelectedEssay] = useState(null);
+    const pdfWidth = usePdfWidth();
 
     function onDocumentLoadSuccess({numPages}) {
         setNumPages(numPages);
@@ -35,41 +51,20 @@ function Writings() {
     // Show essay selection if none selected
     if (!selectedEssay) {
         return (
-            <div>
-                <h1>Writings</h1>
-                <p style={{ color: "#aaa", marginBottom: "2rem" }}>Select an essay to read:</p>
-                <div style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    gap: "1rem",
-                    maxWidth: "400px",
-                    margin: "0 auto"
-                }}>
+            <div className="writings-section">
+                <h1 className="writings-title">Writings</h1>
+                <p className="writings-subtitle">A collection of essays and reflections</p>
+                <div className="essays-grid">
                     {essays.map((essay, index) => (
-                        <button
+                        <div
                             key={index}
+                            className="essay-card"
                             onClick={() => setSelectedEssay(essay)}
-                            style={{
-                                padding: "1rem 1.5rem",
-                                fontSize: "1rem",
-                                backgroundColor: "#1a1a2e",
-                                color: "#eaeaea",
-                                border: "1px solid #333",
-                                borderRadius: "8px",
-                                cursor: "pointer",
-                                transition: "all 0.2s ease"
-                            }}
-                            onMouseOver={(e) => {
-                                e.target.style.backgroundColor = "#16213e";
-                                e.target.style.borderColor = "#00d9ff";
-                            }}
-                            onMouseOut={(e) => {
-                                e.target.style.backgroundColor = "#1a1a2e";
-                                e.target.style.borderColor = "#333";
-                            }}
                         >
-                            {essay.title}
-                        </button>
+                            <h3 className="essay-card-title">{essay.title}</h3>
+                            <p className="essay-card-description">{essay.description}</p>
+                            <span className="essay-card-link">Read essay →</span>
+                        </div>
                     ))}
                 </div>
             </div>
@@ -78,39 +73,20 @@ function Writings() {
 
     // Show selected essay
     return (
-        <div>
-            <h1>Writings</h1>
-            <button
-                onClick={handleBack}
-                style={{
-                    padding: "0.5rem 1rem",
-                    marginBottom: "1rem",
-                    backgroundColor: "#16213e",
-                    color: "#00d9ff",
-                    border: "1px solid #00d9ff",
-                    borderRadius: "4px",
-                    cursor: "pointer"
-                }}
-            >
+        <div className="writings-reader">
+            <h1 className="writings-reader-title">Writings</h1>
+            <button className="back-button" onClick={handleBack}>
                 ← Back to list
             </button>
-            <h2 style={{ color: "#00d9ff", marginBottom: "1rem" }}>{selectedEssay.title}</h2>
-            <div style={{
-                maxHeight: "70vh",
-                overflowY: "auto",
-                border: "1px solid #333",
-                borderRadius: "8px",
-                padding: "1rem",
-                margin: "0 auto",
-                width: "fit-content"
-            }}>
+            <h2 className="essay-title">{selectedEssay.title}</h2>
+            <div className="pdf-container">
                 <Document file={selectedEssay.file} onLoadSuccess={onDocumentLoadSuccess}>
                     {numPages && Array.from({length: numPages}, (_, index) => (
-                        <Page key={index + 1} pageNumber={index + 1} width={600} />
+                        <Page key={index + 1} pageNumber={index + 1} width={pdfWidth} />
                     ))}
                 </Document>
             </div>
-            <p>{numPages} pages</p>
+            <p className="page-count">{numPages} pages</p>
         </div>
     );
 }

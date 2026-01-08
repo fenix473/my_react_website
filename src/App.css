@@ -3,6 +3,29 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #0f0f1a 0%, #1a1a2e 50%, #16213e 100%);
   color: #eaeaea;
+  overflow-x: hidden;
+}
+
+/* Work in Progress Banner */
+.wip-banner {
+  background-color: #fbbf24;
+  color: #1a1a2e;
+  padding: 0.75rem;
+  font-weight: bold;
+  font-size: clamp(0.9rem, 2.5vw, 1.1rem);
+  text-align: center;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Page content wrapper */
+.App h1 {
+  font-size: clamp(1.75rem, 5vw, 2.5rem);
+  margin: 1rem 0;
+}
+
+.App p {
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
 }
 
 .App-logo {
