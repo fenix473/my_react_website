@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/my_website/static/css/main.5a009c58.css",
+    "main.js": "/my_website/static/js/main.bc140ea8.js",
+    "static/js/453.7f709e95.chunk.js": "/my_website/static/js/453.7f709e95.chunk.js",
+    "static/media/Orange Man.pdf": "/my_website/static/media/Orange Man.7c551809b364fd442196.pdf",
+    "static/media/Subjugation of Nature.pdf": "/my_website/static/media/Subjugation of Nature.d160eb0b1830b11ec654.pdf",
+    "static/media/Copy of Research Essay.pdf": "/my_website/static/media/Copy of Research Essay.58fc42a2bcb0c8490a6d.pdf",
+    "static/media/Editable ENG II_ Initial.pdf": "/my_website/static/media/Editable ENG II_ Initial.089fb0cbf7d4723b988c.pdf",
+    "index.html": "/my_website/index.html",
+    "main.5a009c58.css.map": "/my_website/static/css/main.5a009c58.css.map",
+    "main.bc140ea8.js.map": "/my_website/static/js/main.bc140ea8.js.map",
+    "453.7f709e95.chunk.js.map": "/my_website/static/js/453.7f709e95.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5a009c58.css",
+    "static/js/main.bc140ea8.js"
+  ]
+}
