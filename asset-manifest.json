@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/my_react_website/static/css/main.9ef7207f.css",
-    "main.js": "/my_react_website/static/js/main.fb00ad4c.js",
+    "main.js": "/my_react_website/static/js/main.56fc0f67.js",
     "static/js/453.7f709e95.chunk.js": "/my_react_website/static/js/453.7f709e95.chunk.js",
     "static/media/Orange Man.pdf": "/my_react_website/static/media/Orange Man.7c551809b364fd442196.pdf",
     "static/media/Subjugation of Nature.pdf": "/my_react_website/static/media/Subjugation of Nature.d160eb0b1830b11ec654.pdf",
@@ -9,11 +9,11 @@
     "static/media/Editable ENG II_ Initial.pdf": "/my_react_website/static/media/Editable ENG II_ Initial.089fb0cbf7d4723b988c.pdf",
     "index.html": "/my_react_website/index.html",
     "main.9ef7207f.css.map": "/my_react_website/static/css/main.9ef7207f.css.map",
-    "main.fb00ad4c.js.map": "/my_react_website/static/js/main.fb00ad4c.js.map",
+    "main.56fc0f67.js.map": "/my_react_website/static/js/main.56fc0f67.js.map",
     "453.7f709e95.chunk.js.map": "/my_react_website/static/js/453.7f709e95.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.9ef7207f.css",
-    "static/js/main.fb00ad4c.js"
+    "static/js/main.56fc0f67.js"
   ]
 }
